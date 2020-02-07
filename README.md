@@ -19,9 +19,9 @@ Because none of the node modules are included in this repository.
  - For to-do lists with two-or-more to-do's, a Sort By menu is exposed that allows the user to sort the to-do's by Priority or by Due Date.  Sorting them results in GraphQL calls that will save the new sort order for future persistence.
  - The to-do's can also be manually sorted using drag-n-drop.  This allows the user to individually move each of the to-do's into the preferred position.
 
+## Screenshots
 
-
-
+Please check out the screenshots under `/todos/todo-screenshots` for a visual representation of the application in use.
 
 ## Architecture
 
