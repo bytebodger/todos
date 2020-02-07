@@ -28,9 +28,11 @@ Because none of the node modules are included in this repository.
 The following explains the particular architectural decisions made for this app:
 
 **State Management**
+
 There is no third-party statement management tool used.  The state values needed to run the app are very slight and this did not justify the overhead (both in download packages, and in coding constructs) needed to implement 3rd-party state management tools.  This is especially true of Redux - which is a powerful tool, but for this application, it would be like building a sand castle with a bulldozer.  
 
 **Component Caching**
+
 In this app, I've used a simple technique for sharing references between existing components.  Each component imports an initially-empty object called `components`.  In the constructor, the component adds a reference to itself into the `components` object.  For example, this code is found in the `<DataLayer/>` component:
 
     constructor(props) {
@@ -83,6 +85,7 @@ I'll be perfectly honest here.  The few times that I've discussed or shown this 
  3. **This isn't "the way" that you do things in React.**  Yeah.  I've actually heard that from people several times.  Of course Redux wasn't the original way to handle state management in apps.  But people didn't like the "base" functionality, so they worked on a separate state management solution.  I don't really care if something is "the way" that other React developers do things.  I only care whether it's an elegant solution.
 
 **Layered Architecture**
+
 Whenever I'm doing green-fields development, I tend to use an approach with multiple, nested layers.  The layers tend to act like a data cache (because a layer that's higher in the structure may be storing some values which will, eventually, get used in lower levels of the structure).  This is also an effective way to build single-page apps, because all of the data/logic resides in the multiple layers.  Thus, there is no need to ever "refresh" the apps web page.
 
 In this app, the layers are as such:
@@ -102,6 +105,7 @@ Obviously, the bulk of a user's time would typically be spent in the `<TodosModu
 
 
 **Type Checking(ish)**
+
 Since this app is done in "regular" React/JavaScript, with no TypeScript or Flow, I've still implemented my default solution for type checking on methods.  Because you can never theoretically know exactly how other future developers will choose to invoke your methods, I feel it's good practice to always check the *types* of values that have been passed into a method.
 
 For this reason, I have a utility library that I frequently use.  It's in `utilities/is.js`.  It contains a series of simple Boolean checks to determine whether a value is of a given type.  These are then used as such:
@@ -121,6 +125,7 @@ For this reason, I have a utility library that I frequently use.  It's in `utili
     }
 
 **GraphQL**
+
 Data is passed between the React frontend and the PHP backend using GraphQL.  After looking at several React libraries to handle this, I decided to simply pass the GraphQL queries manually.  For example, retrieving to-do lists is handled in `<DataLayer/>` as such:
 
     getTodoLists() {  
@@ -157,9 +162,11 @@ Data is passed between the React frontend and the PHP backend using GraphQL.  Af
 On the backend (PHP), I'm using `graphql-php` to parse the submitted queries.
 
 **Drag-n-Drop**
+
 Aside from being able to sort the to-do's by priority or due date, they can also be individually moved within the state using drag-n-drop.  Once they've been moved, their newly-set sort order is preserved for future sessions.
 
 **Data Persistence**
+
 On the frontend, temporal values are stored in `localStorage`.  This makes the app less brittle for the user because, if they choose to manually refresh the page or they navigate away-then-back, the system will remember that they are logged in and they won't have to reauthenticate.  This is especially critical for GUEST sessions, because if the system did not remember they were logged in, they would lose all their data if they accidentally refreshed the page or navigated away-then-back.
 
 On the backend, primary data persistence is provided by MySQL.  The schema for the database is included in the repository.  The app is supported by three tables: `todo`, `todoList`, and `user`.
