@@ -41,16 +41,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.createTodo) {
+            components.TodosModule.addNewTodo(json.data.createTodo);
+         }
+      })
       .catch(error => {
          console.error('failed createTodo()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.createTodo) {
-            components.TodosModule.addNewTodo(response.data.createTodo);
-         }
       });
    }
    
@@ -69,16 +69,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.createTodoList) {
+            components.TodosModule.addNewTodoList(json.data.createTodoList);
+         }
+      })
       .catch(error => {
          console.error('failed createTodoList()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.createTodoList) {
-            components.TodosModule.addNewTodoList(response.data.createTodoList);
-         }
       });
    }
    
@@ -102,20 +102,20 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.deleteTodo) {
+            if (!is.anArray(json.data.deleteTodo)) {
+               components.TodosModule.updateTodos([]);
+            } else {
+               components.TodosModule.updateTodos(json.data.deleteTodo);
+            }
+         }
+      })
       .catch(error => {
          console.error('failed deleteTodo()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.deleteTodo) {
-            if (!is.anArray(response.data.deleteTodo)) {
-               components.TodosModule.updateTodos([]);
-            } else {
-               components.TodosModule.updateTodos(response.data.deleteTodo);
-            }
-         }
       });
    }
    
@@ -133,20 +133,20 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.deleteTodoList) {
+            if (!is.anObject(json.data.deleteTodoList)) {
+               components.TodosModule.deleteTodoList([]);
+            } else {
+               components.TodosModule.deleteTodoList(json.data.deleteTodoList);
+            }
+         }
+      })
       .catch(error => {
          console.error('failed deleteTodoList()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.deleteTodoList) {
-            if (!is.anObject(response.data.deleteTodoList)) {
-               components.TodosModule.deleteTodoList([]);
-            } else {
-               components.TodosModule.deleteTodoList(response.data.deleteTodoList);
-            }
-         }
       });
    }
    
@@ -164,20 +164,20 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.getTodoLists) {
+            if (!is.anArray(json.data.getTodoLists)) {
+               components.TodosModule.updateTodoLists([]);
+            } else {
+               components.TodosModule.updateTodoLists(json.data.getTodoLists);
+            }
+         }
+      })
       .catch(error => {
          console.error('failed getTodoLists()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.getTodoLists) {
-            if (!is.anArray(response.data.getTodoLists)) {
-               components.TodosModule.updateTodoLists([]);
-            } else {
-               components.TodosModule.updateTodoLists(response.data.getTodoLists);
-            }
-         }
       });
    }
    
@@ -200,20 +200,20 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.getTodos) {
+            if (!is.anArray(json.data.getTodos)) {
+               components.TodosModule.updateTodos([]);
+            } else {
+               components.TodosModule.updateTodos(json.data.getTodos);
+            }
+         }
+      })
       .catch(error => {
          console.error('failed getTodos()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.getTodos) {
-            if (!is.anArray(response.data.getTodos)) {
-               components.TodosModule.updateTodos([]);
-            } else {
-               components.TodosModule.updateTodos(response.data.getTodos);
-            }
-         }
       });
    }
    
@@ -237,20 +237,20 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.moveTodo) {
+            if (!is.anArray(json.data.moveTodo)) {
+               components.TodosModule.updateTodos([]);
+            } else {
+               components.TodosModule.updateTodos(json.data.moveTodo);
+            }
+         }
+      })
       .catch(error => {
          console.error('failed moveTodo()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.moveTodo) {
-            if (!is.anArray(response.data.moveTodo)) {
-               components.TodosModule.updateTodos([]);
-            } else {
-               components.TodosModule.updateTodos(response.data.moveTodo);
-            }
-         }
       });
    }
    
@@ -270,16 +270,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.login) {
+            components.DisplayLayer.processLoginResult(json.data.login);
+         }
+      })
       .catch(error => {
          console.error('failed sendLogin()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.login) {
-            components.DisplayLayer.processLoginResult(response.data.login);
-         }
       });
    }
    
@@ -299,16 +299,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.register) {
+            components.DisplayLayer.processRegistrationResult(json.data.register);
+         }
+      })
       .catch(error => {
          console.error('failed sendRegistration()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.register) {
-            components.DisplayLayer.processRegistrationResult(response.data.register);
-         }
       });
    }
    
@@ -332,20 +332,20 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.sortTodos) {
+            if (!is.anArray(json.data.sortTodos)) {
+               components.TodosModule.sortTodos([]);
+            } else {
+               components.TodosModule.updateTodos(json.data.sortTodos);
+            }
+         }
+      })
       .catch(error => {
          console.error('failed sortTodos()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.sortTodos) {
-            if (!is.anArray(response.data.sortTodos)) {
-               components.TodosModule.sortTodos([]);
-            } else {
-               components.TodosModule.updateTodos(response.data.sortTodos);
-            }
-         }
       });
    }
    
@@ -364,16 +364,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.updateTodoDescription) {
+            components.TodosModule.updateTodoDescription(json.data.updateTodoDescription);
+         }
+      })
       .catch(error => {
          console.error('failed updateTodoDescription()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.updateTodoDescription) {
-            components.TodosModule.updateTodoDescription(response.data.updateTodoDescription);
-         }
       });
    }
    
@@ -392,16 +392,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.updateTodoDueDate) {
+            components.TodosModule.updateTodoDueDate(json.data.updateTodoDueDate);
+         }
+      })
       .catch(error => {
          console.error('failed updateTodoDueDate()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.updateTodoDueDate) {
-            components.TodosModule.updateTodoDueDate(response.data.updateTodoDueDate);
-         }
       });
    }
    
@@ -420,16 +420,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.updateTodoIsComplete) {
+            components.TodosModule.updateTodoIsComplete(json.data.updateTodoIsComplete);
+         }
+      })
       .catch(error => {
          console.error('failed updateTodoIsComplete()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.updateTodoIsComplete) {
-            components.TodosModule.updateTodoIsComplete(response.data.updateTodoIsComplete);
-         }
       });
    }
    
@@ -448,16 +448,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.updateTodoListName) {
+            components.TodosModule.updateTodoListName(json.data.updateTodoListName);
+         }
+      })
       .catch(error => {
          console.error('failed updateTodoListName()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.updateTodoListName) {
-            components.TodosModule.updateTodoListName(response.data.updateTodoListName);
-         }
       });
    }
    
@@ -476,16 +476,16 @@ export default class DataLayer extends React.Component {
       });
       let parameters = JSON.parse(JSON.stringify(constant.commonHeaders));
       parameters.body = query;
-      const promise = fetch(constant.apiUrl, parameters)
+      fetch(constant.apiUrl, parameters)
       .then(response => response.json())
+      .then(json => {
+         if (json.data && json.data.updateTodoPriority) {
+            components.TodosModule.updateTodoPriority(json.data.updateTodoPriority);
+         }
+      })
       .catch(error => {
          console.error('failed updateTodoPriority()');
          console.error(error);
-      });
-      promise.then(response => {
-         if (response.data && response.data.updateTodoPriority) {
-            components.TodosModule.updateTodoPriority(response.data.updateTodoPriority);
-         }
       });
    }
    
